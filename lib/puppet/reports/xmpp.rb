@@ -29,7 +29,7 @@ Puppet::Reports.register_report(:xmpp) do
       self.environment = XMPP_ENV
     end
 
-    if self.status == 'failed' and (XMPP_ENV.include?(self.environment?) or XMPP_ENV == 'ALL')
+    if self.status == 'failed' and (XMPP_ENV.include?(self.environment) or XMPP_ENV == 'ALL')
       jid = JID::new(XMPP_JID)
       cl = Client::new(jid)
 
