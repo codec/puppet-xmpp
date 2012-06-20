@@ -24,7 +24,12 @@ Puppet::Reports.register_report(:xmpp) do
   DESC
 
   def process
-    if self.status == 'failed' and (XMPP_ENV.include?(self.environment) or XMPP_ENV == 'ALL')
+    if self.environment == nil
+      Puppet.info "environment for #{self.host} was nil, is now #{config[:xmpp_environment]}"
+      self.environment = config[:xmpp_environment]
+    end
+
+    if self.status == 'failed' and (XMPP_ENV.include?(self.environment?) or XMPP_ENV == 'ALL')
       jid = JID::new(XMPP_JID)
       cl = Client::new(jid)
 
