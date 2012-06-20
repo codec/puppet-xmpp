@@ -25,8 +25,8 @@ Puppet::Reports.register_report(:xmpp) do
 
   def process
     if self.environment == nil
-      Puppet.info "environment for #{self.host} was nil, is now #{config[:xmpp_environment]}"
-      self.environment = config[:xmpp_environment]
+      Puppet.info "environment for #{self.host} was nil, is now #{XMPP_ENV}"
+      self.environment = config[XMPP_ENV]
     end
 
     if self.status == 'failed' and (XMPP_ENV.include?(self.environment?) or XMPP_ENV == 'ALL')
